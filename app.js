@@ -1,10 +1,11 @@
-import {run} from '@cycle/rxjs-run';
+
+import Cycle from '@cycle/xstream-run';
 import {div, label, input, hr, h1, makeDOMDriver} from '@cycle/dom';
-import Rx from 'rxjs';
+import xs from 'xstream';
 
 function main(sources) {
   const sinks = {
-    DOM: Rx.Observable.timer(0, 1000)
+    DOM: xs.periodic(1000)
       .map(t =>
         h1(`You've wasted ${t} seconds`)
       )
@@ -16,4 +17,4 @@ const drivers = {
   DOM: makeDOMDriver('#app')
 };
 
-run(main, drivers);
+Cycle.run(main, drivers);
